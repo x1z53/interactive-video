@@ -8,6 +8,8 @@ import { Player } from './components/Player/Player';
 import { useProjectStore } from './stores/projectStore';
 import { loadProject, saveProject, selectVideoFiles, selectProjectFolder, exportTauriPlayer } from './utils/fileOperations';
 import { exportHtmlPlayer } from './utils/htmlPlayer';
+import { exportYamlPlayer } from './utils/yamlExport';
+import { exportWindowsPlayer } from './utils/windowsPlayer';
 import { Project } from './types/project';
 import './App.css';
 
@@ -121,6 +123,31 @@ function Editor() {
     }
   }, [project]);
 
+  const handleExportYaml = useCallback(async () => {
+    const dir = await selectProjectFolder();
+    if (dir) {
+      await exportYamlPlayer(project, dir);
+      alert(`YAML player exported to:\n${dir}`);
+    }
+  }, [project]);
+
+  const handlePlayYaml = useCallback(async () => {
+    try {
+      await invoke('play_yaml_player', { project });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      alert(`Failed to launch YAML player:\n${message}`);
+    }
+  }, [project]);
+
+  const handleExportWindows = useCallback(async () => {
+    const dir = await selectProjectFolder();
+    if (dir) {
+      await exportWindowsPlayer(project, dir);
+      alert(`Windows player exported to:\n${dir}`);
+    }
+  }, [project]);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
@@ -181,6 +208,9 @@ function Editor() {
         <div style={{ width: 1, height: 20, background: '#444', margin: '0 8px' }} />
         <button onClick={handleExportHtml} className="menu-btn">Export HTML</button>
         <button onClick={handleExportApp} className="menu-btn">Export App</button>
+        <button onClick={handleExportYaml} className="menu-btn">Export YAML</button>
+        <button onClick={handleExportWindows} className="menu-btn">Export Windows</button>
+        <button onClick={handlePlayYaml} className="menu-btn primary">▶ Play YAML</button>
       </div>
 
       <Toolbar />

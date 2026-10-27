@@ -20,7 +20,9 @@
       "identifier": "fs:scope",
       "allow": [
         { "path": "**" },
-        { "path": "/**" }
+        { "path": "/**" },
+        { "path": "$APPLOCALDATA/**" },
+        { "path": "$APPLOCALDATA/yaml-player-export/**" }
       ]
     },
     "dialog:default",

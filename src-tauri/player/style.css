@@ -1,0 +1,17 @@
+.buttons-osd {
+  border-radius: 20px;
+  box-shadow: 0px 0px 20px 20px rgba(50, 50, 50, 0.9);
+  background-color: rgba(50, 50, 50, 0.9);
+  padding: 12px;
+}
+
+.buttons-osd button {
+  min-height: 48px;
+}
+
+.end-title {
+  color: #ffffff;
+  font-size: 64px;
+  font-weight: bold;
+  text-shadow: 0px 2px 8px rgba(0, 0, 0, 0.8);
+}

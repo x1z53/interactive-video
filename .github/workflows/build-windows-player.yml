@@ -1,0 +1,57 @@
+name: Build Windows Player
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag (optional)"
+        required: false
+        default: ""
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: als-huge
+    defaults:
+      run:
+        working-directory: ./interactive-video
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: ./interactive-video/package-lock.json
+
+      - name: Setup Rust
+        uses: https://github.com/dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-pc-windows-msvc
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Build Tauri app for Windows
+        run: npm run tauri build -- --target x86_64-pc-windows-msvc
+        env:
+          CI: true
+
+      - name: Upload installer artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: windows-installer
+          path: |
+            interactive-video/src-tauri/target/x86_64-pc-windows-msvc/release/bundle/msi/*.msi
+            interactive-video/src-tauri/target/x86_64-pc-windows-msvc/release/bundle/nsis/*.exe
+
+      - name: Upload portable executable artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: windows-portable-exe
+          path: interactive-video/src-tauri/target/x86_64-pc-windows-msvc/release/*.exe

@@ -1,0 +1,37 @@
+nodes:
+  - id: 1
+    title: "Видео 1"
+    file: "videos/1.mp4"
+    outputs:
+      - 2
+      - 3
+      - 4
+
+  - id: 2
+    title: "Видео 2"
+    file: "videos/2.avi"
+    outputs:
+      - 2
+      - 5
+
+  - id: 3
+    title: "Видео 3"
+    file: "videos/3.mov"
+    outputs:
+      - 5
+
+  - id: 4
+    title: "Видео 4"
+    file: "videos/4.webm"
+    outputs:
+      - 6
+
+  - id: 5
+    title: "Видео 5"
+    file: "videos/5.mkv"
+
+  - id: 6
+    title: "Видео 6"
+    file: "videos/6.mpg"
+    outputs:
+      - 1
