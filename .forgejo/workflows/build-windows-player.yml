@@ -7,9 +7,6 @@ on:
 jobs:
   build:
     runs-on: als-huge
-    defaults:
-      run:
-        working-directory: ./interactive-video
 
     steps:
       - name: Checkout repository
@@ -20,7 +17,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: ./interactive-video/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Setup Rust
         uses: https://github.com/dtolnay/rust-toolchain@stable
