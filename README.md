@@ -71,7 +71,7 @@ nodes:
 ### Получение Windows-исполняемого файла
 
 1. Соберите проект на Windows вручную (`npm run tauri build`).
-2. Либо используйте GitHub Actions workflow `.github/workflows/build-windows-player.yml` — он собирает `.msi`, `.exe` (NSIS) и портативный `.exe` на `windows-latest` runner.
+2. Либо используйте GitHub Actions workflow `.github/workflows/build-windows-player.yml` — он собирает `.msi`, `.exe` (NSIS) и портативный `.exe` на `windows-latest` runner и выкладывает их в артефакты/релиз.
 3. Скачайте готовый `.exe` из артефактов или GitHub Releases и укажите его при экспорте.
 
 ## Разработка
