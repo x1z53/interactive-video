@@ -2,14 +2,7 @@ name: Build Windows Player
 
 on:
   workflow_dispatch:
-    inputs:
-      tag:
-        description: "Release tag (optional)"
-        required: false
-        default: ""
   push:
-    tags:
-      - "v*"
 
 jobs:
   build:
